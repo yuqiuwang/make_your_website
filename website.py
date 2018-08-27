@@ -58,7 +58,6 @@ class Application(tornado.web.Application):
             (r"/query", SearchHandler),
             (r"/query/(.*)", SearchHandler),
             (r"/touch", TouchHandler),
-            #(r"/.well-known/pki-validation/fileauth.txt", CheckhHandler),
         ]
         settings = dict(
             template_path=os.path.join(os.path.dirname(__file__), "templates"),
@@ -66,11 +65,6 @@ class Application(tornado.web.Application):
             debug=False,
             )
         tornado.web.Application.__init__(self, handlers, **settings)
-
-#class CheckhHandler(tornado.web.RequestHandler):
-#
-#    def get(self):
-#        self.render(os.path.join(os.path.dirname(__file__), ".well-known/pki-validation/fileauth.txt"))
 
 
 class IndexHandler(tornado.web.RequestHandler):
