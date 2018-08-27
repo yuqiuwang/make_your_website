@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+
+
+<html>
+	<head>
+		<meta charset="utf-8" />
+	</head>
+	<body>
+		<section>
+			<header class="main">
+				<h1>{{draw_type.upper()}}</h1>
+			</header>
+			{% if draw_type=="heatmap" %}
+				<span class="image main"><img src="{{ static_url("images/heatmap.png") }}" alt="" /></span>
+			{% end %}
+		</section>
+		<section>
+			{% if state=="not_draw" %}
+				<form id="upload-form" action="/tool/{{draw_type}}" method="post" enctype="multipart/form-data" >
+					<div class="main">
+						<input type="file" name="file" id="file" class="inputfile" />
+					</div>
+					<div class="row gtr-uniform">
+						<div class="col-6 col-12-xsmall">
+							<select name="save-type" id="save-type">
+								<option value="png">选择保存的图片格式 默认png</option>
+								<option value="png">png</option>
+								<option value="tiff">tiff</option>
+								<option value="jpg">jpg</option>
+							</select>
+						
+							<div class="col-6 col-12-xsmall">
+							{% if draw_type=="heatmap" %}
+								<input type="text" name="color" id="color" placeholder="请输入颜色 默认 RdYlBu_r" />
+							{% end %}
+							{% if draw_type=="K_means" %}
+								<input type="text" name="clusters" id="clusters" placeholder="请输入聚类分组的数目 默认为2（必须为整数，且不能为1）" />
+							{% end %}
+							</div>
+						</div>
+					</div>
+					<div class="main">
+						<input type="submit" value="submit" name="submit" id="submit" class="primary" />
+					</div>
+			{% elif state=="draw" %}
+				<div class="main">
+					<a href="{{file_name}}" class="button" download>下载</a>
+				</div>
+			{% end %}
+			</form>
+		</section>
+	</body>
+</html>

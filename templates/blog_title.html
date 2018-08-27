@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+
+
+<html>
+	<body>
+		<section>
+				<h2 id="elements"></h2>
+				<div class="row gtr-200">
+					<div class="col-12 col-12-medium">
+
+						<!-- Text stuff -->
+						{% for index,entry in enumerate(entrys) %}
+							<h2><a href="/entry/{{entry[0]}}" target="_blank">{{entry[3].split("\n")[0]}}</a></h2>
+							<h3>{{entry[2]}}</h3>
+							<p>{{"\n".join(entry[3].split("\n")[1:])}}</p>
+							<hr />
+						{% end %}
+							
+							<h4></h4>
+							<ul class="pagination">
+							
+							{% if page_num == 0 %}
+								<li><span class="button disabled">Prev</span></li>
+							{% else %}
+								<li><a href="{{page_infos[page_num-1]}}" class="button">Prev</a></li>
+							{% end %}
+							{% for idx, page_info in enumerate(page_infos) %}
+								{% if page_num == idx %}
+									<li><a href="{{page_info}}" class="page active">{{page_num+1}}</a></li>
+								{% elif abs(page_num-idx) > 10 %}
+									{% continue %}
+								{% else %}
+									<li><a href="{{page_info}}" class="page">{{idx+1}}</a></li>
+								{% end %}
+							{% end %}
+							{% if page_num == len(page_infos)-1 %}
+								<li><span class="button disabled">Next</span></li>
+							{% else %}
+								<li><a href="{{page_infos[page_num+1]}}" class="button">Next</a></li>
+							{% end %}
+							</ul>
+					</div>
+				</div>
+		</section>
+	</body>
+</html>
