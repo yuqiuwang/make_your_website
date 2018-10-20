@@ -13,6 +13,7 @@ from PIL import Image
 class CodePic:
 
     def __init__(self, data_path, save_type="txt"):
+        # 这个只要前面与后面对比比较明显就好了，相邻颜色对应的字符越相似，我在网上复制了一段字符串
         self.my_codes = '''@B%8&WM#*oahkbdpqwmZO0QLCJUYXzcvunxrjft/\|()1{}[]?-_+~<>i!lI;:,"^`'. '''
         self.data_path = data_path
         self.save_type = save_type
